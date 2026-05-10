@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Louis Vuitton - Official Authentication</title>
+    <title>LV Verification Service</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Montserrat:wght@300;400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Montserrat:wght@300;400;500&display=swap');
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
             margin: 0;
             padding: 0;
-            background-color: #f8f8f8; /* Delikatne tło, by biała karta się odcinała */
+            background-color: #f2f2f2;
             font-family: 'Montserrat', sans-serif;
             display: flex;
             justify-content: center;
@@ -20,61 +20,44 @@
             min-height: 100vh;
         }
 
-        /* Główny kontener imitujący aplikację mobilną */
         .app-container {
-            width: 95%;
-            max-width: 400px;
+            width: 92%;
+            max-width: 390px;
             background: #ffffff;
-            border-radius: 30px; /* Zaokrąglone ramki */
+            /* Subtelny monogram w tle ramki */
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Ctext x='50%25' y='50%25' font-family='serif' font-size='10' fill='%23000' fill-opacity='0.03' text-anchor='middle' dominant-baseline='middle'%3ELV%3C/text%3E%3C/svg%3E");
+            border-radius: 24px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            position: relative;
-            animation: slideUp 0.8s ease-out;
-        }
-
-        @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            border: 1px solid #eaeaea;
         }
 
         .header {
-            padding: 40px 20px 20px;
+            padding: 45px 20px 20px;
             text-align: center;
         }
 
-        /* Logo LV na górze */
-        .lv-monogram {
-            font-family: 'Cinzel', serif;
-            font-size: 2.5rem;
-            font-weight: 600;
-            color: #000;
-            margin-bottom: 5px;
-            line-height: 1;
-        }
-
-        .lv-brand {
-            font-family: 'Cinzel', serif;
-            letter-spacing: 6px;
-            font-size: 0.9rem;
-            color: #000;
+        .verified-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 500;
+            color: #1a1a1a;
             margin-bottom: 30px;
         }
 
-        .status-badge {
-            background: #000;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 50px;
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            font-weight: 600;
-            text-transform: uppercase;
-            display: inline-block;
-            margin-bottom: 20px;
+        .verified-status::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #27ae60;
+            border-radius: 50%;
         }
 
-        .product-display {
-            width: 100%;
+        .product-section {
             padding: 0 30px;
             text-align: center;
         }
@@ -82,129 +65,117 @@
         .product-img {
             width: 100%;
             height: auto;
-            max-height: 250px;
-            object-fit: contain;
-            margin-bottom: 20px;
+            mix-blend-mode: multiply;
+            margin-bottom: 25px;
         }
 
-        .content {
-            padding: 0 35px 40px;
+        .info-section {
+            padding: 0 30px 40px;
             text-align: center;
         }
 
         h1 {
             font-family: 'Cinzel', serif;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
+            font-size: 1.1rem;
+            letter-spacing: 4px;
             color: #000;
             margin-bottom: 15px;
+            font-weight: 500;
         }
 
         .divider {
-            width: 40px;
+            width: 30px;
             height: 1px;
-            background: #e0e0e0;
-            margin: 15px auto;
+            background: #000;
+            margin: 20px auto;
         }
 
-        p {
-            font-size: 0.85rem;
-            line-height: 1.6;
-            color: #666;
-            margin-bottom: 25px;
+        .description {
+            font-size: 0.8rem;
+            line-height: 1.8;
+            color: #555;
+            font-weight: 400;
         }
 
-        .verification-footer {
+        .footer {
             background: #fafafa;
             padding: 25px;
             border-top: 1px solid #f0f0f0;
             text-align: center;
         }
 
-        .cert-id {
-            font-family: monospace;
-            font-size: 0.75rem;
-            color: #999;
+        .meta-info {
+            font-size: 0.65rem;
+            color: #aaa;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
-        /* Loader */
         #loader {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background: #ffffff;
             z-index: 1000;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.4s ease;
         }
 
-        .loading-line {
-            width: 100px;
-            height: 2px;
-            background: #f0f0f0;
-            position: relative;
-            overflow: hidden;
-            margin-top: 20px;
-        }
-
-        .loading-line::after {
-            content: '';
-            position: absolute;
-            left: -100%;
-            width: 100%;
-            height: 100%;
+        .dot-loader {
+            width: 4px;
+            height: 4px;
             background: #000;
-            animation: loading 1.5s infinite;
+            border-radius: 50%;
+            box-shadow: 15px 0 0 #000, -15px 0 0 #000;
+            animation: pulse 1.5s infinite;
         }
 
-        @keyframes loading {
-            100% { left: 100%; }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
         }
     </style>
 </head>
 <body>
 
     <div id="loader">
-        <div style="font-family: 'Cinzel', serif; letter-spacing: 8px; font-size: 0.8rem;">LOUIS VUITTON</div>
-        <div class="loading-line"></div>
+        <div class="dot-loader"></div>
     </div>
 
     <div class="app-container">
         <div class="header">
-            <div class="lv-monogram">LV</div>
-            <div class="lv-brand">LOUIS VUITTON</div>
-            <div class="status-badge">Produkt Autentyczny</div>
+            <div class="verified-status">Autentyczność Potwierdzona</div>
         </div>
 
-        <div class="product-display">
-            <img src="https://image.goat.com/transform/v1/attachments/product_template_additional_pictures/images/086/339/843/original/1068449_01.jpg.jpeg?action=crop&width=750" class="product-img" alt="LV Trainer">
+        <div class="product-section">
+            <img src="https://image.goat.com/transform/v1/attachments/product_template_additional_pictures/images/086/339/843/original/1068449_01.jpg.jpeg?action=crop&width=750" class="product-img" alt="Product View">
         </div>
 
-        <div class="content">
-            <h1>PASZPORT CYFROWY</h1>
+        <div class="info-section">
+            <h1>CERTYFIKAT WŁASNOŚCI</h1>
             <div class="divider"></div>
-            <p>Niniejszym potwierdza się, że ten produkt został pomyślnie zweryfikowany w globalnym systemie Louis Vuitton i spełnia najwyższe standardy jakości Domu Mody.</p>
+            <p class="description">
+                Produkt został zarejestrowany w systemie jako oryginalny wyrób kaletniczy. 
+                Zintegrowany moduł NFC gwarantuje zgodność z dokumentacją techniczną Paris HQ.
+            </p>
         </div>
 
-        <div class="verification-footer">
-            <div class="cert-id" id="cert-id"></div>
-            <div style="font-size: 0.6rem; color: #ccc; margin-top: 10px; letter-spacing: 2px;">VERIFIED VIA NFC SECURE PROTOCOL</div>
+        <div class="footer">
+            <div class="meta-info" id="data-field"></div>
         </div>
     </div>
 
     <script>
         window.onload = () => {
-            const randomID = 'LV-' + Math.random().toString(36).substring(2, 10).toUpperCase();
-            document.getElementById('cert-id').innerText = 'SERIAL: ' + randomID + ' | 2026-05-10';
+            const id = 'REG-' + Math.random().toString(36).substring(2, 11).toUpperCase();
+            document.getElementById('data-field').innerText = 'KOD: ' + id + ' | 10.05.2026';
 
             setTimeout(() => {
                 const loader = document.getElementById('loader');
                 loader.style.opacity = '0';
-                setTimeout(() => loader.style.display = 'none', 500);
-            }, 2000);
+                setTimeout(() => loader.style.display = 'none', 400);
+            }, 1800);
         };
     </script>
 </body>

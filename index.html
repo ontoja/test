@@ -2,76 +2,80 @@
 <html lang="pl">
 <head>
   <meta charset="UTF-8">
-  <title>LEGIT CHECK</title>
+  <title>Louis Vuitton Authentication</title>
 
   <style>
     body {
       margin: 0;
-      height: 100vh;
+      background: #0a0a0a;
+      color: white;
+      font-family: "Arial", sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
-      background: black;
-      color: white;
-      font-family: Arial, sans-serif;
+      height: 100vh;
       text-align: center;
-      overflow: hidden;
     }
 
-    .box {
-      animation: fadeIn 2s ease forwards;
+.container {
+  max-width: 400px;
+  padding: 20px;
+  border-radius: 20px;
+  background: white;
+  color: black;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+}
+
+    img {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 20px;
     }
 
     h1 {
-      font-size: 5rem;
-      margin: 0;
-      animation: pop 0.8s ease-out forwards;
+      font-size: 2rem;
+      margin: 10px 0;
+      color: #00ff88;
     }
 
     p {
-      font-size: 1.5rem;
-      opacity: 0.7;
-      margin-top: 10px;
+      font-size: 1rem;
+      opacity: 0.8;
     }
 
     .loading {
-      font-size: 1.2rem;
+      font-size: 1rem;
       opacity: 0.6;
       animation: blink 1s infinite;
     }
 
-    @keyframes pop {
-      0% { transform: scale(0); }
-      80% { transform: scale(1.2); }
-      100% { transform: scale(1); }
+    @keyframes blink {
+      0%,100% { opacity: 0.2; }
+      50% { opacity: 1; }
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    @keyframes blink {
-      0%, 100% { opacity: 0.2; }
-      50% { opacity: 1; }
+      from {opacity:0;}
+      to {opacity:1;}
     }
   </style>
 </head>
 
 <body>
 
-<div class="box" id="content">
-  <div class="loading">Connecting to LV servers...</div>
+<div class="container" id="app">
+  <div class="loading">Łączenie z serwerem Louis Vuitton...</div>
 </div>
 
 <script>
   setTimeout(() => {
-    document.getElementById("content").innerHTML = `
-      <h1>✅ LEGIT</h1>
-      <p>These are authentic. Trust me bro.</p>
+    document.getElementById("app").innerHTML = `
+      <img src="https://image.goat.com/transform/v1/attachments/product_template_additional_pictures/images/086/339/843/original/1068449_01.jpg.jpeg?action=crop&width=750" alt="LV Trainers">
+      <h1>✔ PRODUKT AUTENTYCZNY</h1>
+      <p>Ten produkt został pomyślnie zweryfikowany w systemie Louis Vuitton.</p>
+      <p>ID weryfikacji: LV-${Math.floor(Math.random()*999999)}</p>
     `;
 
-    // vine boom 💀
     const audio = new Audio("https://www.myinstants.com/media/sounds/vine-boom.mp3");
     audio.play();
   }, 2000);

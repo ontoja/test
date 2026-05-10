@@ -1,85 +1,175 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <title>Louis Vuitton Authentication</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LV Authentication</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
 
-  <style>
-    body {
-      margin: 0;
-      background: #0a0a0a;
-      color: white;
-      font-family: "Arial", sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-    }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #1a1512;
+            background-image: url('data:image/svg+xml;base64,CiAgICA8c3ZnIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgICAgIDxwYXRoIGQ9Ik0zMCAxMCBMMzUgMjAgTDQ1IDIwIEwzOCAyOCBMNDIgMzggTDMwIDMyIEwxOCAzOCBMMjIgMjggTDE1IDIwIEwyNSAyMCBaIiBmaWxsPSIjNGEzNzI4IiBvcGFjaXR5PSIwLjIiLz4KICAgICAgICA8dGV4dCB4PSIzMCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIxMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzRhMzcyOCIgb3BhY2l0eT0iMC4yIj5MVjwvdGV4dD4KICAgIDwvc3ZnPgogICAg');
+            background-size: 80px 80px;
+            font-family: 'Montserrat', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #d4af37;
+        }
 
-.container {
-  max-width: 400px;
-  padding: 20px;
-  border-radius: 20px;
-  background: white;
-  color: black;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-}
+        .card {
+            width: 360px;
+            background: #ffffff;
+            border-radius: 0;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #d4af37;
+        }
 
-    img {
-      width: 100%;
-      border-radius: 12px;
-      margin-bottom: 20px;
-    }
+        .header-bar {
+            height: 5px;
+            background: linear-gradient(90deg, #1a1512, #d4af37, #1a1512);
+        }
 
-    h1 {
-      font-size: 2rem;
-      margin: 10px 0;
-      color: #00ff88;
-    }
+        .content {
+            padding: 40px 30px;
+            text-align: center;
+            background: white;
+        }
 
-    p {
-      font-size: 1rem;
-      opacity: 0.8;
-    }
+        .logo {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            letter-spacing: 6px;
+            color: #1a1512;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
 
-    .loading {
-      font-size: 1rem;
-      opacity: 0.6;
-      animation: blink 1s infinite;
-    }
+        .product-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border: 1px solid #f0f0f0;
+            margin-bottom: 25px;
+        }
 
-    @keyframes blink {
-      0%,100% { opacity: 0.2; }
-      50% { opacity: 1; }
-    }
+        .status-badge {
+            display: inline-block;
+            background: #1a1512;
+            color: #d4af37;
+            padding: 8px 20px;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
 
-    @keyframes fadeIn {
-      from {opacity:0;}
-      to {opacity:1;}
-    }
-  </style>
+        h1 {
+            font-family: 'Cinzel', serif;
+            color: #1a1512;
+            font-size: 1.2rem;
+            margin: 10px 0;
+            letter-spacing: 1px;
+        }
+
+        .divider {
+            width: 40px;
+            height: 1px;
+            background: #d4af37;
+            margin: 20px auto;
+        }
+
+        p {
+            color: #555;
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .verify-code {
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: #999;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            text-transform: uppercase;
+        }
+
+        .footer-logo {
+            margin-top: 20px;
+            opacity: 0.3;
+            width: 30px;
+        }
+
+        #loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1a1512;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            transition: opacity 0.5s;
+        }
+
+        .spinner {
+            width: 30px;
+            height: 30px;
+            border: 2px solid #333;
+            border-top: 2px solid #d4af37;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+    </style>
 </head>
-
 <body>
 
-<div class="container" id="app">
-  <div class="loading">Łączenie z serwerem Louis Vuitton...</div>
-</div>
+    <div id="loader">
+        <div class="spinner"></div>
+        <p style="color: #d4af37; margin-top: 20px; font-size: 0.7rem; letter-spacing: 3px;">WERYFIKACJA NFC...</p>
+    </div>
 
-<script>
-  setTimeout(() => {
-    document.getElementById("app").innerHTML = `
-      <img src="https://image.goat.com/transform/v1/attachments/product_template_additional_pictures/images/086/339/843/original/1068449_01.jpg.jpeg?action=crop&width=750" alt="LV Trainers">
-      <h1>✔ PRODUKT AUTENTYCZNY</h1>
-      <p>Ten produkt został pomyślnie zweryfikowany w systemie Louis Vuitton.</p>
-      <p>ID weryfikacji: LV-${Math.floor(Math.random()*999999)}</p>
-    `;
+    <div class="card">
+        <div class="header-bar"></div>
+        <div class="content">
+            <div class="logo">LOUIS VUITTON</div>
+            <div class="status-badge">Produkt Zweryfikowany</div>
+            <img src="https://image.goat.com/transform/v1/attachments/product_template_additional_pictures/images/086/339/843/original/1068449_01.jpg.jpeg?action=crop&width=750" class="product-img">
+            <h1>CERTYFIKAT AUTENTYCZNOŚCI</h1>
+            <div class="divider"></div>
+            <p>Ten przedmiot został zidentyfikowany jako oryginalny wyrób Domu Mody Louis Vuitton. Czip NFC potwierdza zgodność z numerem seryjnym w bazie danych Paris HQ.</p>
+            <div class="verify-code" id="code-box"></div>
+        </div>
+    </div>
 
-    const audio = new Audio("https://www.myinstants.com/media/sounds/vine-boom.mp3");
-    audio.play();
-  }, 2000);
-</script>
-
+    <script>
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('loader').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loader').style.display = 'none';
+                    const code = 'LV-' + Math.random().toString(36).substring(2, 10).toUpperCase();
+                    document.getElementById('code-box').innerText = 'ID: ' + code + ' | DATA: ' + new Date().toLocaleDateString('pl-PL');
+                    
+                    const audio = new Audio("https://www.myinstants.com/media/sounds/notification-up.mp3");
+                    audio.volume = 0.3;
+                    audio.play().catch(() => {});
+                }, 500);
+            }, 2000);
+        };
+    </script>
 </body>
 </html>

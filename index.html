@@ -3,227 +3,209 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>LV Digital Passport</title>
+    <title>LV Authentication Services</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=Montserrat:wght@300;400;500&display=swap');
 
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
             margin: 0;
             padding: 0;
-            background-color: #0f0c0a;
-            background-image: url('data:image/svg+xml;base64,CiAgICA8c3ZnIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgICAgIDxwYXRoIGQ9Ik0zMCAxNSBMMzUgMjUgTDQ1IDI1IEwzOCAzMyBMNDIgNDMgTDMwIDM3IEwxOCA0MyBMMjIgMzMgTDE1IDI1IEwyNSAyNSBaIiBmaWxsPSIjMmEyMDFhIiBvcGFjaXR5PSIwLjE1Ii8+CiAgICAgICAgPHRleHQgeD0iMzAiIHk9IjU1IiBmb250LWZhbWlseT0ic2VyaWYiIGZvbnQtc2l6ZT0iOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzJhMjAxYSIgb3BhY2l0eT0iMC4xNSI+TFY8L3RleHQ+CiAgICA8L3N2Zz4KICAgIA==');
-            background-size: 100px 100px;
+            background-color: #fdfdfd;
+            background-image: url('data:image/svg+xml;base64,CiAgICA8c3ZnIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIgdmlld0JveD0iMCAwIDgwIDgwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgICAgIDxwYXRoIGQ9Ik00MCAyMCBMNDUgMzIgTDU4IDMyIEw0OCA0MCBMNTIgNTIgTDQwIDQ0IEwyOCA1MiBMMzIgNDAgTDIyIDMyIEwzNSAzMiBaIiBmaWxsPSIjZjJmMGVhIiAvPgogICAgICAgIDx0ZXh0IHg9IjQwIiB5PSI2NSIgZm9udC1mYW1pbHk9InNlcmlmIiBmb250LXNpemU9IjciIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNlOGU1ZGUiPkxWPC90ZXh0PgogICAgPC9zdmc+CiAgICA=');
+            background-size: 120px 120px;
             font-family: 'Montserrat', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            color: #d4af37;
+            color: #1a1a1a;
         }
 
-        .mobile-container {
+        .mobile-frame {
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             height: 100vh;
             background: #ffffff;
             position: relative;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 0 50px rgba(0,0,0,0.5);
-            border: 12px solid #1a1512;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.05);
             overflow-y: auto;
         }
 
-        /* Złota ozdobna ramka wewnętrzna */
-        .inner-border {
-            position: absolute;
-            top: 10px; left: 10px; right: 10px; bottom: 10px;
-            border: 1px solid #d4af37;
-            pointer-events: none;
-            z-index: 10;
-        }
-
         .header {
-            padding: 40px 20px 20px;
+            padding: 50px 20px 30px;
             text-align: center;
-            background: white;
+            border-bottom: 1px solid #f0f0f0;
         }
 
         .logo {
             font-family: 'Cinzel', serif;
-            font-size: 1.6rem;
-            letter-spacing: 8px;
-            color: #1a1512;
+            font-size: 1.4rem;
+            letter-spacing: 10px;
+            color: #000;
             margin: 0;
-            font-weight: 700;
+            font-weight: 500;
         }
 
-        .badge-container {
-            margin: 20px 0;
+        .status-section {
+            padding: 30px 20px;
+            text-align: center;
         }
 
-        .status-badge {
-            background: #1a1512;
-            color: #d4af37;
-            padding: 10px 25px;
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            font-weight: 600;
-            text-transform: uppercase;
-            display: inline-block;
-        }
-
-        .product-section {
-            width: 100%;
-            background: #fdfdfd;
-            padding: 0 20px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
+        .verified-badge {
+            display: inline-flex;
             align-items: center;
+            gap: 8px;
+            color: #000;
+            font-size: 0.75rem;
+            letter-spacing: 2.5px;
+            font-weight: 500;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+        }
+
+        .verified-badge::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: #000;
+            border-radius: 50%;
+        }
+
+        .product-container {
+            width: 100%;
+            padding: 0 40px;
+            margin-bottom: 30px;
         }
 
         .product-img {
             width: 100%;
-            max-width: 320px;
             height: auto;
             object-fit: contain;
-            margin: 20px 0;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
-            animation: fadeIn 1.5s ease-out;
+            mix-blend-mode: multiply;
+        }
+
+        .info-content {
+            text-align: center;
+            padding: 0 35px;
         }
 
         h2 {
             font-family: 'Cinzel', serif;
-            color: #1a1512;
-            font-size: 1.3rem;
-            margin: 20px 0 10px;
-            letter-spacing: 2px;
-            text-align: center;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+            font-weight: 500;
         }
 
-        .divider {
-            width: 60px;
-            height: 1px;
-            background: #d4af37;
-            margin: 15px auto;
-        }
-
-        .description {
-            color: #444;
-            font-size: 0.9rem;
-            line-height: 1.7;
-            text-align: center;
-            padding: 0 25px;
+        .desc {
+            font-size: 0.85rem;
+            line-height: 1.8;
+            color: #666;
             font-weight: 300;
+            margin-bottom: 40px;
         }
 
-        .footer-data {
+        .data-footer {
             margin-top: auto;
-            padding: 30px 20px;
-            background: white;
+            padding: 40px 20px;
+            background: #fafafa;
+            border-top: 1px solid #f0f0f0;
             text-align: center;
-            border-top: 1px solid #eee;
         }
 
-        .id-label {
-            font-family: monospace;
-            font-size: 0.8rem;
-            color: #888;
-            letter-spacing: 1px;
+        .cert-id {
+            font-size: 0.7rem;
+            letter-spacing: 1.5px;
+            color: #999;
+            text-transform: uppercase;
         }
 
-        /* Loader */
+        /* Clean White Loader */
         #loader {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: #1a1512;
+            background: #ffffff;
             z-index: 1000;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            transition: opacity 0.6s ease;
+            transition: opacity 0.5s ease;
         }
 
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 1px solid #333;
-            border-top: 1px solid #d4af37;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        .line-loader {
+            width: 120px;
+            height: 1px;
+            background: #eee;
+            position: relative;
+            overflow: hidden;
+            margin-top: 20px;
         }
 
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* NFC Pulsing Icon */
-        .nfc-icon {
-            font-size: 2rem;
-            margin-bottom: 20px;
-            animation: pulse 2s infinite;
+        .line-loader::after {
+            content: '';
+            position: absolute;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            animation: slide 1.5s infinite linear;
         }
 
-        @keyframes pulse {
-            0% { opacity: 0.3; }
-            50% { opacity: 1; }
-            100% { opacity: 0.3; }
+        @keyframes slide {
+            100% { left: 100%; }
         }
     </style>
 </head>
 <body>
 
     <div id="loader">
-        <div class="nfc-icon">📡</div>
-        <div class="spinner"></div>
-        <p style="color: #d4af37; margin-top: 25px; font-size: 0.7rem; letter-spacing: 4px; font-weight: 200;">AUTORYZACJA NFC...</p>
+        <div style="font-family: 'Cinzel', serif; letter-spacing: 8px; font-size: 0.9rem;">LOUIS VUITTON</div>
+        <div class="line-loader"></div>
     </div>
 
-    <div class="mobile-container">
-        <div class="inner-border"></div>
-        
+    <div class="mobile-frame">
         <div class="header">
             <h1 class="logo">LOUIS VUITTON</h1>
-            <div class="badge-container">
-                <div class="status-badge">Produkt Zweryfikowany</div>
+        </div>
+
+        <div class="status-section">
+            <div class="verified-badge">Produkt Autentyczny</div>
+            
+            <div class="product-container">
+                <img src="https://image.goat.com/transform/v1/attachments/product_template_additional_pictures/images/086/339/843/original/1068449_01.jpg.jpeg?action=crop&width=750" class="product-img" alt="LV Trainer">
+            </div>
+
+            <div class="info-content">
+                <h2>CYFROWY PASZPORT</h2>
+                <p class="desc">
+                    Ten dokument potwierdza pochodzenie produktu z kolekcji Louis Vuitton. 
+                    Weryfikacja wykonana poprzez szyfrowany system chipowy.
+                </p>
             </div>
         </div>
 
-        <div class="product-section">
-            <img src="https://image.goat.com/transform/v1/attachments/product_template_additional_pictures/images/086/339/843/original/1068449_01.jpg.jpeg?action=crop&width=750" class="product-img" alt="LV Trainer">
-            <h2>CERTYFIKAT<br>AUTENTYCZNOŚCI</h2>
-            <div class="divider"></div>
-            <p class="description">
-                Przedmiot zidentyfikowany jako oryginalny wyrób Domu Mody Louis Vuitton. 
-                Szyfrowany paszport cyfrowy potwierdza zgodność materiałów i numeru seryjnego.
-            </p>
-        </div>
-
-        <div class="footer-data">
-            <div class="id-label" id="cert-details"></div>
-            <div style="margin-top: 10px; font-size: 0.6rem; color: #ccc;">PARIS HQ DATABASE ACCESS</div>
+        <div class="data-footer">
+            <div class="cert-id" id="meta"></div>
+            <div style="font-size: 0.6rem; color: #bbb; margin-top: 15px; letter-spacing: 2px;">AUTHENTICATION SERVICES PARIS</div>
         </div>
     </div>
 
     <script>
         window.onload = () => {
-            const code = 'LV-' + Math.random().toString(36).substring(2, 11).toUpperCase();
-            const date = new Date().toLocaleDateString('pl-PL');
-            document.getElementById('cert-details').innerHTML = 'ID: ' + code + ' | ' + date;
+            const code = 'CERT-' + Math.random().toString(36).substring(2, 9).toUpperCase();
+            document.getElementById('meta').innerText = 'ID: ' + code + ' | ' + new Date().toLocaleDateString('pl-PL');
 
             setTimeout(() => {
                 const loader = document.getElementById('loader');
                 loader.style.opacity = '0';
-                setTimeout(() => loader.style.display = 'none', 600);
-                
-                // Dźwięk sukcesu
-                const audio = new Audio("https://www.myinstants.com/media/sounds/notification-up.mp3");
-                audio.volume = 0.2;
-                audio.play().catch(() => {});
-            }, 2800);
+                setTimeout(() => loader.style.display = 'none', 500);
+            }, 2200);
         };
     </script>
 </body>

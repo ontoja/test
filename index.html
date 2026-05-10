@@ -2,173 +2,228 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LV Authentication</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LV Digital Passport</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400;600&display=swap');
+
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         body {
             margin: 0;
             padding: 0;
-            background-color: #1a1512;
-            background-image: url('data:image/svg+xml;base64,CiAgICA8c3ZnIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgICAgIDxwYXRoIGQ9Ik0zMCAxMCBMMzUgMjAgTDQ1IDIwIEwzOCAyOCBMNDIgMzggTDMwIDMyIEwxOCAzOCBMMjIgMjggTDE1IDIwIEwyNSAyMCBaIiBmaWxsPSIjNGEzNzI4IiBvcGFjaXR5PSIwLjIiLz4KICAgICAgICA8dGV4dCB4PSIzMCIgeT0iNTUiIGZvbnQtZmFtaWx5PSJzZXJpZiIgZm9udC1zaXplPSIxMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzRhMzcyOCIgb3BhY2l0eT0iMC4yIj5MVjwvdGV4dD4KICAgIDwvc3ZnPgogICAg');
-            background-size: 80px 80px;
+            background-color: #0f0c0a;
+            background-image: url('data:image/svg+xml;base64,CiAgICA8c3ZnIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgdmlld0JveD0iMCAwIDYwIDYwIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogICAgICAgIDxwYXRoIGQ9Ik0zMCAxNSBMMzUgMjUgTDQ1IDI1IEwzOCAzMyBMNDIgNDMgTDMwIDM3IEwxOCA0MyBMMjIgMzMgTDE1IDI1IEwyNSAyNSBaIiBmaWxsPSIjMmEyMDFhIiBvcGFjaXR5PSIwLjE1Ii8+CiAgICAgICAgPHRleHQgeD0iMzAiIHk9IjU1IiBmb250LWZhbWlseT0ic2VyaWYiIGZvbnQtc2l6ZT0iOCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iIzJhMjAxYSIgb3BhY2l0eT0iMC4xNSI+TFY8L3RleHQ+CiAgICA8L3N2Zz4KICAgIA==');
+            background-size: 100px 100px;
             font-family: 'Montserrat', sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
+            min-height: 100vh;
             color: #d4af37;
         }
 
-        .card {
-            width: 360px;
+        .mobile-container {
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
             background: #ffffff;
-            border-radius: 0;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
             position: relative;
-            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 0 50px rgba(0,0,0,0.5);
+            border: 12px solid #1a1512;
+            overflow-y: auto;
+        }
+
+        /* Złota ozdobna ramka wewnętrzna */
+        .inner-border {
+            position: absolute;
+            top: 10px; left: 10px; right: 10px; bottom: 10px;
             border: 1px solid #d4af37;
+            pointer-events: none;
+            z-index: 10;
         }
 
-        .header-bar {
-            height: 5px;
-            background: linear-gradient(90deg, #1a1512, #d4af37, #1a1512);
-        }
-
-        .content {
-            padding: 40px 30px;
+        .header {
+            padding: 40px 20px 20px;
             text-align: center;
             background: white;
         }
 
         .logo {
             font-family: 'Cinzel', serif;
-            font-size: 1.4rem;
-            letter-spacing: 6px;
+            font-size: 1.6rem;
+            letter-spacing: 8px;
             color: #1a1512;
-            margin-bottom: 30px;
+            margin: 0;
             font-weight: 700;
+        }
+
+        .badge-container {
+            margin: 20px 0;
+        }
+
+        .status-badge {
+            background: #1a1512;
+            color: #d4af37;
+            padding: 10px 25px;
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            font-weight: 600;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+
+        .product-section {
+            width: 100%;
+            background: #fdfdfd;
+            padding: 0 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .product-img {
             width: 100%;
-            height: 220px;
-            object-fit: cover;
-            border: 1px solid #f0f0f0;
-            margin-bottom: 25px;
+            max-width: 320px;
+            height: auto;
+            object-fit: contain;
+            margin: 20px 0;
+            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.1));
+            animation: fadeIn 1.5s ease-out;
         }
 
-        .status-badge {
-            display: inline-block;
-            background: #1a1512;
-            color: #d4af37;
-            padding: 8px 20px;
-            font-size: 0.7rem;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        h1 {
+        h2 {
             font-family: 'Cinzel', serif;
             color: #1a1512;
-            font-size: 1.2rem;
-            margin: 10px 0;
-            letter-spacing: 1px;
+            font-size: 1.3rem;
+            margin: 20px 0 10px;
+            letter-spacing: 2px;
+            text-align: center;
         }
 
         .divider {
-            width: 40px;
+            width: 60px;
             height: 1px;
             background: #d4af37;
-            margin: 20px auto;
+            margin: 15px auto;
         }
 
-        p {
-            color: #555;
-            font-size: 0.85rem;
-            line-height: 1.6;
-            margin-bottom: 20px;
+        .description {
+            color: #444;
+            font-size: 0.9rem;
+            line-height: 1.7;
+            text-align: center;
+            padding: 0 25px;
+            font-weight: 300;
         }
 
-        .verify-code {
+        .footer-data {
+            margin-top: auto;
+            padding: 30px 20px;
+            background: white;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+
+        .id-label {
             font-family: monospace;
             font-size: 0.8rem;
-            color: #999;
-            border-top: 1px solid #eee;
-            padding-top: 15px;
-            text-transform: uppercase;
+            color: #888;
+            letter-spacing: 1px;
         }
 
-        .footer-logo {
-            margin-top: 20px;
-            opacity: 0.3;
-            width: 30px;
-        }
-
+        /* Loader */
         #loader {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0; width: 100%; height: 100%;
             background: #1a1512;
+            z-index: 1000;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 100;
-            transition: opacity 0.5s;
+            transition: opacity 0.6s ease;
         }
 
         .spinner {
-            width: 30px;
-            height: 30px;
-            border: 2px solid #333;
-            border-top: 2px solid #d4af37;
+            width: 50px;
+            height: 50px;
+            border: 1px solid #333;
+            border-top: 1px solid #d4af37;
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
 
         @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* NFC Pulsing Icon */
+        .nfc-icon {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            50% { opacity: 1; }
+            100% { opacity: 0.3; }
+        }
     </style>
 </head>
 <body>
 
     <div id="loader">
+        <div class="nfc-icon">📡</div>
         <div class="spinner"></div>
-        <p style="color: #d4af37; margin-top: 20px; font-size: 0.7rem; letter-spacing: 3px;">WERYFIKACJA NFC...</p>
+        <p style="color: #d4af37; margin-top: 25px; font-size: 0.7rem; letter-spacing: 4px; font-weight: 200;">AUTORYZACJA NFC...</p>
     </div>
 
-    <div class="card">
-        <div class="header-bar"></div>
-        <div class="content">
-            <div class="logo">LOUIS VUITTON</div>
-            <div class="status-badge">Produkt Zweryfikowany</div>
-            <img src="https://image.goat.com/transform/v1/attachments/product_template_additional_pictures/images/086/339/843/original/1068449_01.jpg.jpeg?action=crop&width=750" class="product-img">
-            <h1>CERTYFIKAT AUTENTYCZNOŚCI</h1>
+    <div class="mobile-container">
+        <div class="inner-border"></div>
+        
+        <div class="header">
+            <h1 class="logo">LOUIS VUITTON</h1>
+            <div class="badge-container">
+                <div class="status-badge">Produkt Zweryfikowany</div>
+            </div>
+        </div>
+
+        <div class="product-section">
+            <img src="https://image.goat.com/transform/v1/attachments/product_template_additional_pictures/images/086/339/843/original/1068449_01.jpg.jpeg?action=crop&width=750" class="product-img" alt="LV Trainer">
+            <h2>CERTYFIKAT<br>AUTENTYCZNOŚCI</h2>
             <div class="divider"></div>
-            <p>Ten przedmiot został zidentyfikowany jako oryginalny wyrób Domu Mody Louis Vuitton. Czip NFC potwierdza zgodność z numerem seryjnym w bazie danych Paris HQ.</p>
-            <div class="verify-code" id="code-box"></div>
+            <p class="description">
+                Przedmiot zidentyfikowany jako oryginalny wyrób Domu Mody Louis Vuitton. 
+                Szyfrowany paszport cyfrowy potwierdza zgodność materiałów i numeru seryjnego.
+            </p>
+        </div>
+
+        <div class="footer-data">
+            <div class="id-label" id="cert-details"></div>
+            <div style="margin-top: 10px; font-size: 0.6rem; color: #ccc;">PARIS HQ DATABASE ACCESS</div>
         </div>
     </div>
 
     <script>
         window.onload = () => {
+            const code = 'LV-' + Math.random().toString(36).substring(2, 11).toUpperCase();
+            const date = new Date().toLocaleDateString('pl-PL');
+            document.getElementById('cert-details').innerHTML = 'ID: ' + code + ' | ' + date;
+
             setTimeout(() => {
-                document.getElementById('loader').style.opacity = '0';
-                setTimeout(() => {
-                    document.getElementById('loader').style.display = 'none';
-                    const code = 'LV-' + Math.random().toString(36).substring(2, 10).toUpperCase();
-                    document.getElementById('code-box').innerText = 'ID: ' + code + ' | DATA: ' + new Date().toLocaleDateString('pl-PL');
-                    
-                    const audio = new Audio("https://www.myinstants.com/media/sounds/notification-up.mp3");
-                    audio.volume = 0.3;
-                    audio.play().catch(() => {});
-                }, 500);
-            }, 2000);
+                const loader = document.getElementById('loader');
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 600);
+                
+                // Dźwięk sukcesu
+                const audio = new Audio("https://www.myinstants.com/media/sounds/notification-up.mp3");
+                audio.volume = 0.2;
+                audio.play().catch(() => {});
+            }, 2800);
         };
     </script>
 </body>
